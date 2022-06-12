@@ -35,7 +35,4 @@ le kilométrage d’une voiture Pour ce faire vous devez faire 2 programmes :
 
 #### a faire
 
-- externaliser mon algo de lr dans une class => à faire demain soir
-- revoir predict.py => à faire demain soir
-- gérer les cas d'erreurs => à faire demain soir
-- documenter le code => à faire demain soir
+- documenter le code

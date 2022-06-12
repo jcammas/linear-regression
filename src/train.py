@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
-import pandas as pd
 
 
 def add_intercept(x):
@@ -46,7 +45,10 @@ def predict_(x, theta):
         return None
     if add_intercept(x).shape[1] != theta.shape[0]:
         return None
-    return np.dot(add_intercept(x), theta)
+    try:
+        return np.dot(add_intercept(x), theta)
+    except:
+        return None
 
 
 def gradient(x: np.ndarray, y: np.ndarray, theta) -> None:
@@ -82,11 +84,14 @@ def fit_(x: np.ndarray, y: np.ndarray, theta, alpha, max_iter) -> None:
         return None
     if max_iter <= 0:
         return None
-    for i in range(max_iter):
-        swp = gradient(x, y, theta)
-        tmp = (swp * alpha)
-        theta = theta - tmp
-    return theta
+    try:
+        for i in range(max_iter):
+            swp = gradient(x, y, theta)
+            tmp = (swp * alpha)
+            theta = theta - tmp
+        return theta
+    except:
+        return None
 
 
 def draw_regression(x, y, theta):
@@ -106,6 +111,9 @@ def draw_regression(x, y, theta):
 
 
 def normalize(array):
+    """
+    https://www.baeldung.com/cs/normalization-vs-standardization
+    """
     ret = np.empty([])
     for elem in array:
         ret = np.append(ret, (elem - min(array)) / (max(array) - min(array)))
@@ -138,13 +146,17 @@ def read_csv_file():
         data = np.genfromtxt(sys.argv[1], delimiter=',', skip_header=1)
     except:
         sys.exit("ft_linear_regression: Unable to open file")
+
+    # observe what we can have with normalization in python
     print(data[:, 0])
     print(data[:, 1])
-
     print(normalize(data[:, 0]))
-    print(normalize(data[:, 1])) 
-    
-    return (data[:, 0], data[:, 1], normalize(data[:, 0]), normalize(data[:, 1]))
+    print(normalize(data[:, 1]))
+
+    d1 = data[:, 0]
+    d2 = data[:, 1]
+
+    return (d1, d2, normalize(data[:, 0]), normalize(data[:, 1]))
 
 
 if __name__ == "__main__":

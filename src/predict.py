@@ -13,18 +13,18 @@ def predict(x, theta):
     return theta[0] + theta[1] * x
 
 
-if __name__ == "__main__":
-    # Reading data file
+def get_data():
     try:
         theta = np.genfromtxt("model.csv", delimiter=',', skip_header=1)
     except:
         sys.exit("model.csv error")
-
     try:
-        kilometers = float(
+        klm = float(
             input("kilométrage du véhicule : "))
     except:
         sys.exit("error")
+    print(predict(klm, theta))
 
-    # Executing function and returning predicted value
-    print(predict(kilometers, theta))
+
+if __name__ == "__main__":
+    get_data()
