@@ -2,8 +2,8 @@ import sys
 import numpy as np
 
 
-def predict_without_train(x):
-    return 0 + 0 * x
+def predict_without_train(x, theta):
+    return theta + theta * x
 
 def predict(x, theta):
     """
@@ -25,7 +25,7 @@ def get_data():
             input("kilométrage du véhicule : "))
         except:
             sys.exit("error")
-        print(predict_without_train(klm))
+        print(predict_without_train(klm, 0))
         sys.exit("use train before")
     try:
         klm = float(
