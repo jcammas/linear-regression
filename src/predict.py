@@ -2,6 +2,9 @@ import sys
 import numpy as np
 
 
+def predict_without_train(x):
+    return 0 + 0 * x
+
 def predict(x, theta):
     """
     Le premier programme sera utilisé pour prédire le prix d’une voiture en fonction
@@ -17,7 +20,13 @@ def get_data():
     try:
         theta = np.genfromtxt("model.csv", delimiter=',', skip_header=1)
     except:
-        sys.exit("model.csv error")
+        try:
+            klm = float(
+            input("kilométrage du véhicule : "))
+        except:
+            sys.exit("error")
+        print(predict_without_train(klm))
+        sys.exit("use train before")
     try:
         klm = float(
             input("kilométrage du véhicule : "))
